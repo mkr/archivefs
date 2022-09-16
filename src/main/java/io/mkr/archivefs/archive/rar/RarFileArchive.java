@@ -1,6 +1,5 @@
 package io.mkr.archivefs.archive.rar;
 
-import com.github.junrar.exception.RarException;
 import com.github.junrar.rarfile.FileHeader;
 import io.mkr.archivefs.archive.Archive;
 import io.mkr.archivefs.archive.ArchiveItem;
@@ -41,11 +40,7 @@ public class RarFileArchive implements Archive, Closeable {
     if (fh.isSplitAfter() || fh.isSplitBefore()) {
       throw new IllegalArgumentException("Multi volume archives not supported");
     }
-    try {
-      return archive.getInputStream(fh);
-    } catch (RarException e) {
-      throw new IOException(e);
-    }
+    return archive.getInputStream(fh);
   }
 
   @Override
