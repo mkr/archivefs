@@ -13,7 +13,7 @@ public class RarArchiveItem extends DelegatingArchiveItem<FileHeader> {
 
   @Override
   public String getPath() {
-    return getDelegate().getFileNameW().equals("") ? getDelegate().getFileNameString() : getDelegate().getFileNameW();
+    return getDelegate().getFileName();
   }
 
   @Override
