@@ -36,7 +36,7 @@ public class ArchivePath implements Path {
 
   @Override
   public Path getFileName() {
-    throw new UnsupportedOperationException();
+    return fileSystem.getPath(localPath.substring(localPath.lastIndexOf('/') + 1));
   }
 
   @Override
