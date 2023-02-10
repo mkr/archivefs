@@ -9,11 +9,11 @@ import java.util.Iterator;
 
 public class ArchivePath implements Path {
 
-  private ArchiveFileSystem fileSystem;
-  private String localPath;
-  private PathSegments pathSegments;
+  private final ArchiveFileSystem fileSystem;
+  private final String localPath;
+  private final PathSegments pathSegments;
 
-  public ArchivePath(ArchiveFileSystem fileSystem, String localPath) {
+  public ArchivePath(final ArchiveFileSystem fileSystem, final String localPath) {
     this.fileSystem = fileSystem;
     this.localPath = localPath;
     this.pathSegments = new PathSegments(localPath);
@@ -36,7 +36,7 @@ public class ArchivePath implements Path {
 
   @Override
   public Path getFileName() {
-    throw new UnsupportedOperationException();
+    return fileSystem.getPath(localPath.substring(localPath.lastIndexOf('/') + 1));
   }
 
   @Override
@@ -50,32 +50,32 @@ public class ArchivePath implements Path {
   }
 
   @Override
-  public Path getName(int index) {
+  public Path getName(final int index) {
     return null;  //Todo
   }
 
   @Override
-  public Path subpath(int beginIndex, int endIndex) {
+  public Path subpath(final int beginIndex, final int endIndex) {
     return null;  //Todo
   }
 
   @Override
-  public boolean startsWith(Path other) {
+  public boolean startsWith(final Path other) {
     return false;  //Todo
   }
 
   @Override
-  public boolean startsWith(String other) {
+  public boolean startsWith(final String other) {
     return false;  //Todo
   }
 
   @Override
-  public boolean endsWith(Path other) {
+  public boolean endsWith(final Path other) {
     return false;  //Todo
   }
 
   @Override
-  public boolean endsWith(String other) {
+  public boolean endsWith(final String other) {
     return false;  //Todo
   }
 
@@ -85,27 +85,27 @@ public class ArchivePath implements Path {
   }
 
   @Override
-  public Path resolve(Path other) {
+  public Path resolve(final Path other) {
     return null;  //Todo
   }
 
   @Override
-  public Path resolve(String other) {
+  public Path resolve(final String other) {
     return null;  //Todo
   }
 
   @Override
-  public Path resolveSibling(Path other) {
+  public Path resolveSibling(final Path other) {
     return null;  //Todo
   }
 
   @Override
-  public Path resolveSibling(String other) {
+  public Path resolveSibling(final String other) {
     return null;  //Todo
   }
 
   @Override
-  public Path relativize(Path other) {
+  public Path relativize(final Path other) {
     return null;  //Todo
   }
 
@@ -128,7 +128,7 @@ public class ArchivePath implements Path {
   }
 
   @Override
-  public Path toRealPath(LinkOption... options) throws IOException {
+  public Path toRealPath(final LinkOption... options) throws IOException {
     return this;
   }
 
@@ -138,12 +138,12 @@ public class ArchivePath implements Path {
   }
 
   @Override
-  public WatchKey register(WatchService watcher, WatchEvent.Kind<?>[] events, WatchEvent.Modifier... modifiers) throws IOException {
+  public WatchKey register(final WatchService watcher, final WatchEvent.Kind<?>[] events, final WatchEvent.Modifier... modifiers) throws IOException {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public WatchKey register(WatchService watcher, WatchEvent.Kind<?>... events) throws IOException {
+  public WatchKey register(final WatchService watcher, final WatchEvent.Kind<?>... events) throws IOException {
     throw new UnsupportedOperationException();
   }
 
@@ -153,7 +153,7 @@ public class ArchivePath implements Path {
   }
 
   @Override
-  public int compareTo(Path other) {
+  public int compareTo(final Path other) {
     return 0;  //Todo
   }
 
@@ -166,7 +166,7 @@ public class ArchivePath implements Path {
     return localPath;
   }
 
-  public DirectoryStream<Path> newDirectoryStream(DirectoryStream.Filter<? super Path> filter) {
+  public DirectoryStream<Path> newDirectoryStream(final DirectoryStream.Filter<? super Path> filter) {
     return fileSystem.newDirectoryStream(this, filter);
   }
 
