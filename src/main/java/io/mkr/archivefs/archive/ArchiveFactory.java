@@ -14,7 +14,6 @@ import org.apache.commons.compress.archivers.arj.ArjArchiveInputStream;
 import org.apache.commons.compress.archivers.jar.JarArchiveEntry;
 import org.apache.commons.compress.archivers.jar.JarArchiveInputStream;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -66,8 +65,9 @@ public class ArchiveFactory {
    * @param mimeType The mime type to create the archive for
    * @param file the {@link File}
    * @return the {@link Archive} or null if the type is not supported
+   * @throws IOException If creating the archive fails
    */
-  public Archive archiveForFile(String mimeType, final File file) {
+  public Archive archiveForFile(String mimeType, final File file) throws IOException {
     switch (mimeType) {
       case MIME_ZIP:
       case MIME_JAR:
@@ -75,17 +75,7 @@ public class ArchiveFactory {
       case MIME_RAR:
         return new RarFileArchive(file);
       case MIME_7Z:
-        // The 7Z file implementation does not allow random-access, map it to an in-memory archive
-        return archiveForInputStream(mimeType, new Creator<InputStream>() {
-          @Override
-          public CCSeven7ArchiveInputStream create() {
-            try {
-              return new CCSeven7ArchiveInputStream(new SevenZFile(file));
-            } catch (IOException e) {
-              throw new IllegalArgumentException("Error accessing file", e);
-            }
-          }
-        });
+        return new CCSevenZArchive(file);
       case MIME_LZH1:
       case MIME_LZH2:
       case MIME_LZH3:

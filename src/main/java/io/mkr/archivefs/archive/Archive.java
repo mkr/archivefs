@@ -1,5 +1,6 @@
 package io.mkr.archivefs.archive;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.Collection;
  * An archive is package of directories and files and their associated metadata. Classes implementing this interface
  * provide non-sequential ("random") access to the contents of an archive.
  */
-public interface Archive {
+public interface Archive extends Closeable {
 
   /**
    * Returns metadata items for all entries in the archive

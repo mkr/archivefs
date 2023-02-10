@@ -68,4 +68,8 @@ public class StreamingArchive<S extends InputStream> implements Archive {
     return null;
   }
 
+  @Override
+  public void close() throws IOException {
+
+  }
 }

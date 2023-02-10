@@ -85,4 +85,8 @@ public class MemoryMappedArchive<S extends InputStream> implements Archive {
     return readException;
   }
 
+  @Override
+  public void close() throws IOException {
+
+  }
 }
